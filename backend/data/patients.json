@@ -1,0 +1,172 @@
+[
+  {
+    "patient_id": "P001",
+    "name": "Aarav Sharma",
+    "age": 45,
+    "blood_group": "O+",
+    "conditions": ["Type 2 Diabetes Mellitus", "Essential Hypertension"],
+    "current_medications": ["Metformin 500mg BID", "Amlodipine 5mg OD"],
+    "allergies": ["Penicillin"],
+    "past_treatments": [
+      "2023-04-12: Laparoscopic Cholecystectomy",
+      "2025-11-05: Annual Diabetic Retinopathy Screening"
+    ],
+    "last_visit_notes": "Patient reports well-controlled glycemic levels with regular dietary compliance. Blood pressure remains slightly elevated at 134/86 mmHg. Advised to reduce sodium intake and continue current dosage.",
+    "follow_up_date": "2026-09-18",
+    "doctor_id": "DR003",
+    "phone_number": "+919876543210"
+  },
+  {
+    "patient_id": "P002",
+    "name": "Priya Patel",
+    "age": 32,
+    "blood_group": "A+",
+    "conditions": ["Bronchial Asthma"],
+    "current_medications": ["Salbutamol Inhaler 100mcg PRN", "Budesonide 200mcg DPI BID"],
+    "allergies": ["Dust Mites", "Pollen"],
+    "past_treatments": [
+      "2024-02-18: Emergency Nebulization & Corticosteroids",
+      "2025-08-10: Spirometry Evaluation"
+    ],
+    "last_visit_notes": "Lungs clear on auscultation with no active wheezing noted today. Inhaler technique verified and satisfactory. Advised to avoid cold ambient exposure.",
+    "follow_up_date": "2026-09-15",
+    "doctor_id": "DR003",
+    "phone_number": "+919876543211"
+  },
+  {
+    "patient_id": "P003",
+    "name": "Rajesh Iyer",
+    "age": 58,
+    "blood_group": "B+",
+    "conditions": ["Coronary Artery Disease", "Hyperlipidemia"],
+    "current_medications": ["Aspirin 75mg OD", "Atorvastatin 20mg HS", "Atenolol 50mg OD"],
+    "allergies": ["Sulfa Drugs"],
+    "past_treatments": [
+      "2021-06-14: Percutaneous Coronary Intervention (PCI)",
+      "2025-12-01: Stress Echocardiogram"
+    ],
+    "last_visit_notes": "ECG confirms normal sinus rhythm without acute ischemic changes. Patient denies chest pain or exertional shortness of breath. Lipid panel scheduled for next follow-up.",
+    "follow_up_date": "2026-09-14",
+    "doctor_id": "DR001",
+    "phone_number": "+919876543212"
+  },
+  {
+    "patient_id": "P004",
+    "name": "Ananya Roy",
+    "age": 27,
+    "blood_group": "AB+",
+    "conditions": ["Hypothyroidism", "Generalized Anxiety Disorder"],
+    "current_medications": ["Thyronorm 50mcg OD (empty stomach)", "Escitalopram 10mg HS"],
+    "allergies": [],
+    "past_treatments": [
+      "2025-03-22: Thyroid Ultrasound and TSH Panel",
+      "2025-09-10: Cognitive Behavioral Therapy Consultation"
+    ],
+    "last_visit_notes": "TSH levels stabilized within target therapeutic range (2.1 mIU/L). Anxiety symptoms reported as manageable with ongoing routine. Maintain present dosage.",
+    "follow_up_date": "2026-09-22",
+    "doctor_id": "DR003",
+    "phone_number": "+919876543213"
+  },
+  {
+    "patient_id": "P005",
+    "name": "Vikram Singh",
+    "age": 63,
+    "blood_group": "O-",
+    "conditions": ["Primary Osteoarthritis (Bilateral Knees)", "Hypertension"],
+    "current_medications": ["Paracetamol 650mg PRN", "Telmisartan 40mg OD"],
+    "allergies": ["NSAIDs (Induces Gastritis)"],
+    "past_treatments": [
+      "2022-09-15: Right Knee Diagnostic Arthroscopy",
+      "2025-07-20: Intra-articular Hyaluronic Acid Injection"
+    ],
+    "last_visit_notes": "Reports persistent joint stiffness primarily during morning hours. Physical therapy regiment re-evaluated and augmented with quad-strengthening exercises.",
+    "follow_up_date": "2026-09-20",
+    "doctor_id": "DR004",
+    "phone_number": "+919876543214"
+  },
+  {
+    "patient_id": "P006",
+    "name": "Sunita Rao",
+    "age": 50,
+    "blood_group": "B-",
+    "conditions": ["Rheumatoid Arthritis"],
+    "current_medications": ["Methotrexate 15mg Weekly", "Folic Acid 5mg OD"],
+    "allergies": ["Lactose"],
+    "past_treatments": [
+      "2023-11-08: Bilateral Wrist Joint Steroid Injections",
+      "2026-01-14: Routine Liver Function & ESR Blood Tests"
+    ],
+    "last_visit_notes": "Inflammatory markers indicate moderate disease control. No oral ulcers or GI distress reported post-Methotrexate doses. Continue weekly regimen.",
+    "follow_up_date": "2026-09-25",
+    "doctor_id": "DR004",
+    "phone_number": "+919876543215"
+  },
+  {
+    "patient_id": "P007",
+    "name": "Master Rohan Verma",
+    "age": 8,
+    "blood_group": "A-",
+    "conditions": ["Acute Febrile Illness", "Upper Respiratory Tract Infection"],
+    "current_medications": ["Amoxicillin 250mg Suspension TID", "Syrup Paracetamol 250mg PRN"],
+    "allergies": [],
+    "past_treatments": [
+      "2024-05-10: Outpatient Tonsillitis Management",
+      "2026-08-30: Pediatric Health & Immunization Review"
+    ],
+    "last_visit_notes": "Low-grade fever spike cleared over past 24 hours. Throat exam shows resolving pharyngeal erythema. Advised completing antibiotic course.",
+    "follow_up_date": "2026-09-17",
+    "doctor_id": "DR003",
+    "phone_number": "+919876543216"
+  },
+  {
+    "patient_id": "P008",
+    "name": "Meera Joshi",
+    "age": 39,
+    "blood_group": "O+",
+    "conditions": ["Migraine without Aura"],
+    "current_medications": ["Sumatriptan 50mg PRN", "Propranolol 40mg BID"],
+    "allergies": ["Aspirin"],
+    "past_treatments": [
+      "2024-08-19: Brain MRI (Unremarkable)",
+      "2025-10-12: Neurology Outpatient Consultation"
+    ],
+    "last_visit_notes": "Migraine severity reduced from 5 episodes to 1 per month with prophylactic Propranolol. Patient educated on stress and sleep trigger management.",
+    "follow_up_date": "2026-09-28",
+    "doctor_id": "DR002",
+    "phone_number": "+919876543217"
+  },
+  {
+    "patient_id": "P009",
+    "name": "Siddharth Nair",
+    "age": 48,
+    "blood_group": "AB-",
+    "conditions": ["Gastroesophageal Reflux Disease (GERD)", "Erosive Gastritis"],
+    "current_medications": ["Pantoprazole 40mg OD (before breakfast)", "Domperidone 10mg TID"],
+    "allergies": [],
+    "past_treatments": [
+      "2023-05-30: Upper Gastrointestinal Endoscopy",
+      "2025-04-18: H. pylori Stool Antigen Test (Negative)"
+    ],
+    "last_visit_notes": "Heartburn symptoms significantly improved. Patient instructed to maintain a strict 2-hour gap between dinner and sleeping.",
+    "follow_up_date": "2026-09-19",
+    "doctor_id": "DR003",
+    "phone_number": "+919876543218"
+  },
+  {
+    "patient_id": "P010",
+    "name": "Kavita Reddy",
+    "age": 75,
+    "blood_group": "A+",
+    "conditions": ["Ischemic Stroke (Old)", "Hypertension"],
+    "current_medications": ["Clopidogrel 75mg OD", "Rosuvastatin 10mg HS", "Ramipril 2.5mg OD"],
+    "allergies": ["Iodinated Radiocontrast Media"],
+    "past_treatments": [
+      "2022-01-10: Inpatient Acute Ischemic Stroke Thrombolysis",
+      "2025-06-15: Carotid Artery Doppler Ultrasound"
+    ],
+    "last_visit_notes": "Neurological examination reveals stable residual left-sided weakness without acute deterioration. Gait remains steady with cane support.",
+    "follow_up_date": "2026-09-21",
+    "doctor_id": "DR002",
+    "phone_number": "+919876543219"
+  }
+]

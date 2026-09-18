@@ -1,0 +1,122 @@
+[
+  {
+    "drug_name": "Amoxicillin 250mg",
+    "current_stock": 8,
+    "reorder_threshold": 10,
+    "unit": "vials"
+  },
+  {
+    "drug_name": "Atenolol 50mg",
+    "current_stock": 6,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Paracetamol 650mg",
+    "current_stock": 250,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Metformin 500mg",
+    "current_stock": 180,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Amlodipine 5mg",
+    "current_stock": 120,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Pantoprazole 40mg",
+    "current_stock": 95,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Atorvastatin 20mg",
+    "current_stock": 140,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Salbutamol Inhaler 100mcg",
+    "current_stock": 22,
+    "reorder_threshold": 10,
+    "unit": "bottles"
+  },
+  {
+    "drug_name": "Thyronorm 50mcg",
+    "current_stock": 80,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Telmisartan 40mg",
+    "current_stock": 110,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Aspirin 75mg",
+    "current_stock": 200,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Cetirizine 10mg",
+    "current_stock": 160,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Azithromycin 500mg",
+    "current_stock": 45,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Ibuprofen 400mg",
+    "current_stock": 130,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "ORS Sachets",
+    "current_stock": 300,
+    "reorder_threshold": 10,
+    "unit": "bottles"
+  },
+  {
+    "drug_name": "Ciprofloxacin 500mg",
+    "current_stock": 60,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Clopidogrel 75mg",
+    "current_stock": 85,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Escitalopram 10mg",
+    "current_stock": 50,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Vitamin D3 60000IU",
+    "current_stock": 70,
+    "reorder_threshold": 10,
+    "unit": "tablets"
+  },
+  {
+    "drug_name": "Insulin Glargine 100IU/ml",
+    "current_stock": 15,
+    "reorder_threshold": 10,
+    "unit": "vials"
+  }
+]
