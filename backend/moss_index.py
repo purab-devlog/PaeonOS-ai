@@ -1,74 +1,69 @@
 import asyncio
-from typing import List, Dict, Any, Tuple
+import os
+from typing import List, Dict, Any
+from dotenv import load_dotenv
+from moss import MossClient, DocumentInfo, QueryOptions
 import data_loader
 
-class MossSessionIndex:
-    """Local-first fallback in-memory search vector store simulating Moss SessionIndex."""
-    def __init__(self):
-        self.documents: List[Dict[str, Any]] = []
+load_dotenv()
 
-    def add_docs(self, docs: List[Dict[str, Any]]):
-        self.documents.extend(docs)
+_client = None
+_session = None
+_ready = False
 
-    def query(self, query_text: str, top_k: int = 3) -> List[Tuple[Dict[str, Any], float]]:
-        query_words = set(query_text.lower().split())
-        scored_results = []
-
-        for doc in self.documents:
-            text = doc["text"].lower()
-            score = 0.0
-            for word in query_words:
-                if len(word) > 2 and word in text:
-                    score += 1.0
-            
-            # Additional exact name match boost
-            patient_name = doc["metadata"].get("name", "").lower()
-            if any(w in patient_name for w in query_words if len(w) > 2):
-                score += 3.0
-
-            if score > 0:
-                scored_results.append((doc["metadata"], score))
-
-        scored_results.sort(key=lambda x: x[1], reverse=True)
-        return scored_results[:top_k]
-
-session = None
+def is_ready() -> bool:
+    return _ready
 
 async def initialize_index():
-    global session
-    session = MossSessionIndex()
-    docs = []
+    global _client, _session, _ready
     
+    _client = MossClient(
+        os.getenv("MOSS_PROJECT_ID"),
+        os.getenv("MOSS_PROJECT_KEY")
+    )
+    
+    _session = await _client.session(index_name="paeanos-patients")
+    
+    docs = []
     for p_id, patient in data_loader.patients.items():
-        text_content = f"{patient.get('name', '')} " \
-                       f"{', '.join(patient.get('conditions', []))} " \
-                       f"{', '.join(patient.get('current_medications', []))} " \
-                       f"{', '.join(patient.get('allergies', []))} " \
-                       f"{patient.get('last_visit_notes', '')} " \
-                       f"{', '.join(patient.get('past_treatments', []))}"
-        
-        docs.append({
-            "id": p_id,
-            "text": text_content,
-            "metadata": patient
-        })
-        
-    session.add_docs(docs)
-    print(f"[Moss Index] Initialized in-memory index with {len(docs)} patient documents.")
+        text_content = (
+            f"{patient.get('name', '')} "
+            f"{', '.join(patient.get('conditions', []))} "
+            f"{', '.join(patient.get('current_medications', []))} "
+            f"{', '.join(patient.get('allergies', []))} "
+            f"{patient.get('last_visit_notes', '')} "
+            f"{', '.join(patient.get('past_treatments', []))}"
+        )
+        docs.append(DocumentInfo(
+            id=p_id,
+            text=text_content,
+            metadata={"patient_id": p_id, "name": patient.get("name")}
+        ))
+    
+    await _session.add_docs(docs)
+    _ready = True
+    print(f"[Moss Index] Real Moss SessionIndex initialized with {len(docs)} patients.")
 
 async def query_patient(query_text: str, top_k: int = 3) -> List[Dict[str, Any]]:
-    global session
-    if session is None:
+    global _session
+    if _session is None:
         await initialize_index()
-    results = session.query(query_text, top_k=top_k)
-    return [match[0] for match in results]
+    
+    results = await _session.query(query_text, QueryOptions(top_k=top_k))
+    
+    matched_patients = []
+    for doc in results.docs:
+        patient = data_loader.patients.get(doc.id)
+        if patient:
+            matched_patients.append({**patient, "score": doc.score})
+    
+    return matched_patients
 
 if __name__ == '__main__':
     async def test():
         await initialize_index()
         results = await query_patient("diabetic patient on metformin")
-        print("\n--- Search Results for 'diabetic patient on metformin' ---")
+        print("\n--- Search Results ---")
         for p in results:
-            print(f"- {p['name']} (ID: {p['patient_id']}): {p['conditions']}")
-            
+            print(f"- {p['name']}: {p['conditions']} (score: {p['score']:.3f})")
     asyncio.run(test())

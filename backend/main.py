@@ -192,3 +192,11 @@ def get_stats_endpoint():
         "low_stock_drugs_count": len(low_stock_items),
         "active_calls_count": len(active_calls)
     }
+
+@app.get("/doctors")
+def get_doctors():
+    return list(data_loader.doctors.values())
+
+@app.get("/docotrs/{doctor_id}/availability")
+def get_availability(doctor_id: str, date:str):
+    returnschedule.get_doctor_availability(doctor_id, date)
