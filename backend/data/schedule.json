@@ -1,7 +1,7 @@
 [
   {
     "appointment_id": "APT101",
-    "patient_id": "P001",
+    "patient_id": "P0001",
     "doctor_id": "DR003",
     "date": "2026-09-18",
     "time": "09:00",
@@ -10,7 +10,7 @@
   },
   {
     "appointment_id": "APT102",
-    "patient_id": "P002",
+    "patient_id": "P0002",
     "doctor_id": "DR003",
     "date": "2026-09-18",
     "time": "10:00",
@@ -19,7 +19,7 @@
   },
   {
     "appointment_id": "APT103",
-    "patient_id": "P003",
+    "patient_id": "P0003",
     "doctor_id": "DR001",
     "date": "2026-09-18",
     "time": "11:00",
@@ -28,7 +28,7 @@
   },
   {
     "appointment_id": "APT104",
-    "patient_id": "P005",
+    "patient_id": "P0005",
     "doctor_id": "DR004",
     "date": "2026-09-19",
     "time": "09:00",
@@ -37,7 +37,7 @@
   },
   {
     "appointment_id": "APT105",
-    "patient_id": "P007",
+    "patient_id": "P0007",
     "doctor_id": "DR003",
     "date": "2026-09-19",
     "time": "10:00",
@@ -46,7 +46,7 @@
   },
   {
     "appointment_id": "APT106",
-    "patient_id": "P009",
+    "patient_id": "P0009",
     "doctor_id": "DR003",
     "date": "2026-09-19",
     "time": "14:00",
@@ -55,7 +55,7 @@
   },
   {
     "appointment_id": "APT107",
-    "patient_id": "P010",
+    "patient_id": "P0010",
     "doctor_id": "DR002",
     "date": "2026-09-20",
     "time": "11:00",
@@ -64,7 +64,7 @@
   },
   {
     "appointment_id": "APT108",
-    "patient_id": "P004",
+    "patient_id": "P0004",
     "doctor_id": "DR003",
     "date": "2026-09-20",
     "time": "15:00",

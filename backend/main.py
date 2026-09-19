@@ -16,10 +16,10 @@ import vapi_handler
 
 active_calls: Set[str] = set()
 error_log = []
+call_log = []
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: Initialize Moss Local Index
     await moss_index.initialize_index()
     yield
 
@@ -42,6 +42,9 @@ class BookingRequest(BaseModel):
 class DispenseRequest(BaseModel):
     drug_name: str
     quantity: int
+
+class VoiceCommandRequest(BaseModel):
+    transcript: str
 
 @app.get("/")
 def read_root():
@@ -67,6 +70,10 @@ async def vapi_status():
 async def get_errors():
     return error_log
 
+@app.get("/calls")
+def get_calls():
+    return call_log
+
 @app.post("/vapi/webhook")
 async def vapi_webhook(request: Request):
     try:
@@ -84,31 +91,31 @@ async def vapi_webhook(request: Request):
         elif msg_type == "end-of-call-report":
             if call_id in active_calls:
                 active_calls.remove(call_id)
+            call_log.append({
+                "timestamp": datetime.datetime.now().isoformat(),
+                "duration": message.get("durationSeconds", 0),
+                "intent": "Voice Call",
+                "outcome": "Completed"
+            })
             return {"status": "ended"}
 
-        # Handles both 'tool-calls' (Vapi standard) and 'function-call' (legacy)
         elif msg_type in ["tool-calls", "function-call"]:
             tool_call_id = None
             query = ""
 
-            # Format 1: Vapi Tool Calls Array
             tool_call_list = message.get("toolCallList", [])
             if tool_call_list:
                 tool_call = tool_call_list[0]
                 tool_call_id = tool_call.get("id")
                 function_data = tool_call.get("function", {})
                 arguments = function_data.get("arguments", {})
-                
-                # Handle arguments whether Vapi sends them as a dict or JSON string
                 if isinstance(arguments, str):
                     try:
                         arguments = json.loads(arguments)
                     except Exception:
                         arguments = {}
-
                 query = arguments.get("query", "")
 
-            # Format 2: Direct Tool Calls Array
             elif "toolCalls" in message:
                 tool_call = message["toolCalls"][0]
                 tool_call_id = tool_call.get("id")
@@ -121,14 +128,12 @@ async def vapi_webhook(request: Request):
                         arguments = {}
                 query = arguments.get("query", "")
 
-            # Format 3: Legacy Function Call
             else:
                 function_call = message.get("functionCall", {})
                 tool_call_id = function_call.get("id")
                 parameters = function_call.get("parameters", {})
                 query = parameters.get("query", parameters.get("transcript", ""))
 
-            # Execute business logic
             spoken_response = await vapi_handler.handle_message(query, call_id)
 
             return {
@@ -141,6 +146,7 @@ async def vapi_webhook(request: Request):
             }
 
         return {"status": "ignored"}
+
     except Exception as e:
         error_log.append({
             "timestamp": datetime.datetime.now().isoformat(),
@@ -180,12 +186,27 @@ def get_alerts_endpoint():
 async def search_patients_endpoint(q: str):
     return await moss_index.query_patient(q)
 
+@app.get("/patients/search/keyword")
+def keyword_search(q: str):
+    query_words = q.lower().split()
+    results = []
+    for patient in data_loader.patients.values():
+        text = (
+            f"{patient['name']} "
+            f"{' '.join(patient.get('conditions', []))} "
+            f"{' '.join(patient.get('current_medications', []))}"
+        ).lower()
+        score = sum(1 for w in query_words if len(w) > 2 and w in text)
+        if score > 0:
+            results.append({**patient, "score": score / len(query_words)})
+    results.sort(key=lambda x: x["score"], reverse=True)
+    return results[:3]
+
 @app.get("/stats")
 def get_stats_endpoint():
-    today_appts = schedule.get_appointments("2026-09-18")
+    today_appts = schedule.get_appointments(datetime.date.today().strftime("%Y-%m-%d"))
     missed_followups = schedule.get_missed_followups()
     low_stock_items = inventory.get_low_stock()
-
     return {
         "today_appointments_count": len(today_appts),
         "missed_followups_count": len(missed_followups),
@@ -197,6 +218,11 @@ def get_stats_endpoint():
 def get_doctors():
     return list(data_loader.doctors.values())
 
-@app.get("/docotrs/{doctor_id}/availability")
-def get_availability(doctor_id: str, date:str):
-    returnschedule.get_doctor_availability(doctor_id, date)
+@app.get("/doctors/{doctor_id}/availability")
+def get_availability(doctor_id: str, date: str):
+    return schedule.get_doctor_availability(doctor_id, date)
+
+@app.post("/voice/command")
+async def voice_command(req: VoiceCommandRequest):
+    response = await vapi_handler.handle_message(req.transcript, call_id="web-voice")
+    return {"response": response}

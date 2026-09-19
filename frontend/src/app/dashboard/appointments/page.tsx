@@ -22,7 +22,7 @@ export default function BookAppointmentPage() {
     if (selectedDoctor && date) {
       axios
         .get(`${API_BASE}/doctors/${selectedDoctor}/availability?date=${date}`)
-        .then((res) => setTimeSlots(res.data.slots || []))
+        .then((res) => setTimeSlots(Array.isArray(res.data) ? res.data : []))
         .catch(console.error);
     }
   }, [selectedDoctor, date]);
